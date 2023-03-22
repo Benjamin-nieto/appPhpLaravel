@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +18,20 @@ Route::get('/mensaje', function () {
     return "OK";
 });
 
-Route::post('/json', function (Request $request) {
-    $res = array(1,2,3);
-    $json = json_encode($res);
-    return $json;
+Route::post('/logint', 'UserController@getLogin');
+
+
+
+Route::group(['middleware' => 'api','prefix'=>'auth'], function($router) {
+    //    
+    Route::post('/register', [App\Http\Controllers\AuthController::class,'register']);
+    Route::post('/login', [App\Http\Controllers\AuthController::class,'login']);
+
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/**Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+**/
 
-Route::get('/json2',[ExampleController::class,'message']);
+
