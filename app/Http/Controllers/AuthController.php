@@ -34,7 +34,8 @@ class AuthController extends Controller
                 
         
     }
-
+    
+// comentario
     public function login(Request $request){
          return response()->json(
             ['message'=>'response success',
