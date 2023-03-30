@@ -1,30 +1,16 @@
-Realizar /login
-Realizar /consume con login y con token
-
-usar .env para poner user password y secret
-
-
 
 # PASOS PARA FUNCIONAMIENTO
 
 1. Descargar codigo en htdocs de pc
-2. entrar a la carpeta del proyecto que debe ser htdocs/AppPhpLaravel y ejecutar.
-3.  composer.bat update
+2. Entrar a la carpeta del proyecto que debe ser htdocs/AppPhpLaravel y ejecutar.
+3. Composer.bat update
 4. luego de actualizar podemos arrancar con artisan.
 5. > php artisan serve
 6. ruta 1: localhost:8000/api/mensaje
+7. correr migraciones.
+8.
 
 
-## Requerimients instalar JWT tymon
-
-- https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
-``` 
-composer require tymon/jwt-auth
-
-php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
-
-php artisan make:controller AuthController
-```
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
