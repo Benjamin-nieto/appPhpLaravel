@@ -15,9 +15,6 @@ usar .env para poner user password y secret
 6. ruta 1: localhost:8000/api/mensaje
 
 
-
-
-
 ## Requerimients instalar JWT tymon
 
 - https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
