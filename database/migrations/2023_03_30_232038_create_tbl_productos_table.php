@@ -14,19 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_productos', function (Blueprint $table) {
-
-		$table->bigIncrements('fld_id');
-		$table->bigInteger('fld_IDcat',10);
-		$table->string('fld_nombre',100);
-		$table->string('fld_descripcion',300);
-		$table->bigInteger('fld_valor',12);
-		$table->enum('fld_estado',['1','0'])->default('1');
-		$table->datetime('fld_registro');
-		$table->bigInteger('fld_IDuser',10);
-		$table->datetime('fld_UpdateFecha')->nullable()->default('NULL');
-		$table->bigInteger('fld_UpdateUser',10)->nullable()->default('NULL');
-		$table->primary('fld_id');
-		$table->foreign('fld_IDcat')->references('fld_id')->on('tbl_productos_cat');
+            $table->id('fld_id');
+            $table->foreignId('fld_IDcat')->constrained('tbl_productos_cat', 'fld_id');
+            $table->string('fld_nombre', 100);
+            $table->string('fld_descripcion', 300);
+            $table->bigInteger('fld_valor');
+            $table->enum('fld_estado', ['1', '0'])->default('1')->comment('1=Activo, 0=Inactivo');
+            $table->dateTime('fld_registro');
+            $table->foreignId('fld_IDuser')->constrained('tbl_usuarios', 'fld_id');
+            $table->dateTime('fld_UpdateFecha')->nullable();
+            $table->foreignId('fld_UpdateUser')->nullable()->constrained('tbl_usuarios', 'fld_id');
         });
     }
     

@@ -14,18 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_pedido_detalles', function (Blueprint $table) {
+            $table->bigIncrements('fld_id');
+            $table->unsignedBigInteger('fld_IDpedido');
+            $table->unsignedBigInteger('fld_IDproducto');
+            $table->bigInteger('fld_valor');
+            $table->integer('fld_cantidad');
+            $table->bigInteger('fld_total');
+            $table->timestamps();
 
-		$table->bigIncrements('fld_id');
-		$table->bigInteger('fld_IDpedido',10);
-		$table->bigInteger('fld_IDproducto',10);
-		$table->bigInteger('fld_valor',15);
-		$table->integer('fld_cantidad',3);
-		$table->bigInteger('fld_total',15);
-		$table->primary('fld_id');
-		$table->foreign('fld_IDpedido')->references('fld_id')->on('tbl_pedido');		$table->foreign('fld_IDproducto')->references('fld_id')->on('tbl_productos');
+            $table->foreign('fld_IDpedido')->references('fld_id')->on('tbl_pedido')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('fld_IDproducto')->references('fld_id')->on('tbl_productos')->onDelete('restrict')->onUpdate('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -33,6 +33,10 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('tbl_pedido_detalles', function (Blueprint $table) {
+            $table->dropForeign(['fld_IDpedido']);
+            $table->dropForeign(['fld_IDproducto']);
+        });
         Schema::dropIfExists('tbl_pedido_detalles');
     }
 };

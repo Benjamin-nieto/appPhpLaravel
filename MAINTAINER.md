@@ -39,4 +39,9 @@ php artisan make:migration create_tbl_productos_cat_table
 php artisan make:migration create_tbl_roles_table 
 php artisan make:migration create_tbl_usuarios_table
 
+
+restaurar: php artisan migrate
+borrar: php artisan migrate:rollback
+restaurar: php artisan migrate:reset
+
 ```

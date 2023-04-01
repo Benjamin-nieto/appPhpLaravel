@@ -18,7 +18,7 @@ return new class extends Migration
 		$table->bigIncrements('fld_id');
 		$table->string('fld_nombre',60);
 		$table->text('fld_descripcion');
-		$table->primary('fld_id');
+		//$table->primary('fld_id');
 
         });
     }

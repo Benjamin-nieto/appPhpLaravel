@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('tbl_roles', function (Blueprint $table) {
 
-		$table->increments(fld_id);
+		$table->increments('fld_id');
 		$table->string('fld_nombre',60);
 		$table->datetime('fld_registro');
-		$table->primary('fld_id');
+		//$table->primary('fld_id');
 
         });
     }

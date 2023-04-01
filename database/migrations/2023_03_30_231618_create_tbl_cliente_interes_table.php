@@ -14,17 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_cliente_interes', function (Blueprint $table) {
-
-		$table->bigIncrements('fld_id');
-		$table->bigInteger('fld_IDcliente',10);
-		$table->bigInteger('fld_IDcategoria',10);
-		$table->text('fld_observacion');
-		$table->datetime('fld_fecha');
-		$table->bigInteger('fld_IDuser',10);
-		$table->datetime('fld_UpdateFecha')->nullable()->default('NULL');
-		$table->bigInteger('fld_UpdateUser',10)->nullable()->default('NULL');
-		$table->primary('fld_id');
-		$table->foreign('fld_IDcategoria')->references('fld_id')->on('tbl_categoria');		$table->foreign('fld_IDcliente')->references('fld_id')->on('tbl_cliente');		$table->foreign('fld_IDuser')->references('fld_id')->on('tbl_usuarios');
+            $table->id('fld_id');
+            $table->foreignId('fld_IDcliente')->constrained('tbl_cliente')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('fld_IDcategoria')->constrained('tbl_categoria');
+            $table->text('fld_observacion')->nullable();
+            $table->dateTime('fld_fecha');
+            $table->foreignId('fld_IDuser')->constrained('tbl_usuarios');
+            $table->dateTime('fld_UpdateFecha')->nullable();
+            $table->foreignId('fld_UpdateUser')->nullable()->constrained('tbl_usuarios');
+            $table->timestamps();
         });
     }
 
