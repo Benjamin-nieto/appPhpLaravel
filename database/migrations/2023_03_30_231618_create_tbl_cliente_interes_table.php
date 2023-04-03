@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('tbl_cliente_interes', function (Blueprint $table) {
             $table->id('fld_id');
-            $table->foreignId('fld_IDcliente')->constrained('tbl_cliente')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('fld_IDcategoria')->constrained('tbl_categoria');
+            $table->foreignId('fld_IDcliente')->constrained('tbl_clientes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('fld_IDcategoria')->constrained('tbl_categorias');
             $table->text('fld_observacion')->nullable();
             $table->dateTime('fld_fecha');
             $table->foreignId('fld_IDuser')->constrained('tbl_usuarios');

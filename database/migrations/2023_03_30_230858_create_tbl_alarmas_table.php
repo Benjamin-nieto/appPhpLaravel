@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->date('fld_fecha');
             $table->text('fld_observacion');
             $table->datetime('fld_registro');
-            $table->foreign('fld_IDcliente')->references('fld_id')->on('tbl_cliente')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('fld_IDcliente')->references('fld_id')->on('tbl_clientes')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('fld_IDusuario')->references('fld_id')->on('tbl_usuarios')->onDelete('cascade')->onUpdate('cascade');
         });
     }

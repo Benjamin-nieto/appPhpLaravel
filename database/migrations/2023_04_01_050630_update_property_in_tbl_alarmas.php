@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_categoria', function (Blueprint $table) {
-
-		$table->bigIncrements('fld_id');
-		$table->string('fld_nombre',60);
-		$table->text('fld_descripcion');
-		//$table->primary('fld_id');
+        Schema::table('tbl_alarmas', function (Blueprint $table) {
+            //
+            $table->string('fld_observacion',200)->nullable()->change();
 
         });
     }
-
-
 
     /**
      * Reverse the migrations.
@@ -32,6 +27,11 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_categoria');
+        Schema::table('tbl_alarmas', function (Blueprint $table) {
+            //
+            $table->text('fld_observacion')->change();
+
+
+        });
     }
 };

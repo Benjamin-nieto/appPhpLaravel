@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_pedido', function (Blueprint $table) {
+        Schema::create('tbl_pedidos', function (Blueprint $table) {
             $table->id('fld_id');
             $table->bigInteger('fld_referencia')->unique();
-            $table->foreignId('fld_IDcliente')->constrained('tbl_cliente', 'fld_id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('fld_IDcliente')->constrained('tbl_clientes', 'fld_id')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('fld_IDusuario')->constrained('tbl_usuarios', 'fld_id');
             $table->bigInteger('fld_total');
             $table->enum('fld_estado', ['0', '1', '2'])->comment('0=Pendiente, 1=Pagado, 2=Cancelado');
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_pedido');
+        Schema::dropIfExists('tbl_pedidos');
     }
 };
