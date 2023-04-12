@@ -101,7 +101,40 @@ Referencia: https://www.youtube.com/watch?v=zNTF3U2Hsq0
 
 ```bash
 ## crear seeders expecifico
-php artisan make:seeder Usuarios
+php artisan make:seeder CategorySeeder
 
 
+## ejecutar seeders 
+
+php artisan db:seed
+
+## 
+php artisan migrate:fresh --seed
+```
+
+## Rutas
+
+```
+php artisan route:list
+```
+
+## Middleware
+
+Crear middleware JwtMiddleware.
+
+```
+php artisan make:middleware JwtMiddleware
+```
+## Controller
+
+```
+php artisan make:controller Auth/Auth
+php artisan make:controller Auth/AuthController
+
+```
+
+## Request
+
+```
+php artisan make:request Auth/LoginRequest
 ```

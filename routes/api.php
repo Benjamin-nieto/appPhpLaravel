@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,24 +15,16 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/mensaje', function () {
-    return "OK";
+
+Route::post('register', [App\Http\Controllers\Auth\AuthController::class, 'register']);
+
+Route::post('login', [App\Http\Controllers\Auth\AuthController::class, 'login']);
+
+
+Route::middleware(['jwt.verify'])->group(function () {
+    // rutas protegidas
+    Route::get('/mensaje', function () {
+        return "OK";
+    });
+    Route::get('users', [UserController::class, 'index']);
 });
-
-Route::post('/logint', 'UserController@getLogin');
-
-
-
-Route::group(['middleware' => 'api','prefix'=>'auth'], function($router) {
-    //    
-    Route::post('/register', [App\Http\Controllers\AuthController::class,'register']);
-    Route::post('/login', [App\Http\Controllers\AuthController::class,'login']);
-
-});
-
-/**Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-**/
-
-

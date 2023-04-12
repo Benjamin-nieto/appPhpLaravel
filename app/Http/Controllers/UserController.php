@@ -2,31 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
-
-
-    public function getLogin(Request $request){
-    // Obtiene los datos del JSON enviado en la solicitud
-    $data = $request->json()->all();
-
-    // Valida que se hayan proporcionado los datos requeridos
-    if (!isset($data['username']) || !isset($data['password'])) {
-        return response()->json(['error' => 'Usuario y contraseña requeridos'], 400);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        $user = User::all();
+        return response()->json($user);
     }
 
-    // Crea el usuario en la base de datos utilizando los datos proporcionados
-    $user = new User;
-    $user->username = $data['username'];
-    $user->password = bcrypt($data['password']);
-    //$user->save();
-
-    // Retorna una respuesta satisfactoria
-    return response()->json(['message' => 'u'.$user->username.'p'.$user->password.''], 201);
-    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        //
+    }
 }
