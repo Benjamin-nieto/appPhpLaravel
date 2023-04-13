@@ -13,7 +13,8 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-
+        try {
+           
        $valid = $this->validate($request, [
             'name' => 'required|max:200',
             'email' => 'required|email|max:220|unique:users',
@@ -33,6 +34,13 @@ class AuthController extends Controller
             [ 'message' => 'Usuario registrado exitosamente.',
               'user' => $user,'token'=>$token
                ] , 201);
+
+        }catch (\Exception $e) {
+            return response()->json(
+                [ 'message' => 'Error. '.$e->getMessage()
+                   ] , 404);
+        }
+        
     }
     // comentario
     public function login(LoginRequest $request)
