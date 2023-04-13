@@ -14,11 +14,12 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
-        $this->validate($request, [
+       $valid = $this->validate($request, [
             'name' => 'required|max:200',
             'email' => 'required|email|max:220|unique:users',
             'password' => 'required|min:8'
         ]);
+
 
         $user = User::create([
             'name' => $request->name,
@@ -30,8 +31,8 @@ class AuthController extends Controller
 
         return response()->json(
             [ 'message' => 'Usuario registrado exitosamente.',
-              'user' => $user,
-              'token'=> $token ] , 201);
+              'user' => $user,'token'=>$token
+               ] , 201);
     }
     // comentario
     public function login(LoginRequest $request)
