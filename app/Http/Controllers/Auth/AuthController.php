@@ -45,6 +45,23 @@ class AuthController extends Controller
     // comentario
     public function login(LoginRequest $request)
     {
-        
+        $credencial = $request->only('email','passaword');
+
+        try {
+            
+            if(!$token = JWTAuth::attempt($credencial)){
+                return response()->json([
+                    "error" => "Invalid Credenciales"
+                ],400);
+            }
+
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                    "error" => "Not create token"
+                ],500);
+        }
+
+        return response()->json(compact('token'))
     }
 }
