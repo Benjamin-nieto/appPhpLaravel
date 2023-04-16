@@ -23,7 +23,7 @@ Route::post('login', [App\Http\Controllers\Auth\AuthController::class, 'login'])
 
 Route::middleware(['jwt.verify'])->group(function () {
     // rutas protegidas
-    Route::get('/mensaje', function () {
+    Route::get('mensaje', function () {
         return "OK";
     });
     Route::get('users', [UserController::class, 'index']);

@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -45,23 +46,23 @@ class AuthController extends Controller
     // comentario
     public function login(LoginRequest $request)
     {
-        $credencial = $request->only('email','passaword');
+        $credencials = $request->only('email','password');
 
         try {
             
-            if(!$token = JWTAuth::attempt($credencial)){
+            if(!$token = JWTAuth::attempt($credencials)){
                 return response()->json([
                     "error" => "Invalid Credenciales"
                 ],400);
             }
 
 
-        } catch (\Throwable $th) {
+        } catch (JWTException $th) {
             return response()->json([
                     "error" => "Not create token"
                 ],500);
         }
 
-        return response()->json(compact('token'))
+        return response()->json(compact('token'));
     }
 }

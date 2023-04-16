@@ -116,6 +116,7 @@ php artisan migrate:fresh --seed
 
 ```
 php artisan route:list
+
 ```
 
 ## Middleware
@@ -138,3 +139,4 @@ php artisan make:controller Auth/AuthController
 ```
 php artisan make:request Auth/LoginRequest
 ```
+
