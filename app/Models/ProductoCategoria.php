@@ -13,6 +13,7 @@ class ProductoCategoria extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $fillable = [
+        'fld_nombre',
         // No hay columnas fillable
     ];
 }
