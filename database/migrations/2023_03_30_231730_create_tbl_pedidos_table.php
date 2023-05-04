@@ -25,6 +25,7 @@ return new class extends Migration
             $table->bigInteger('fld_UpdateUser')->nullable()->unsigned();
             $table->foreign('fld_UpdateUser')->references('fld_id')->on('tbl_usuarios')->onDelete('set null')->onUpdate('cascade');
             $table->timestamps();
+
         });
     }
     /**

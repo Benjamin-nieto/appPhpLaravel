@@ -94,6 +94,8 @@ php artisan make:model Rol
 
 php artisan make:model Usuario
 ```
+// $table->timestamps(); // esta linea adiciona created_at y updated_at
+
 
 ## Seeders
 

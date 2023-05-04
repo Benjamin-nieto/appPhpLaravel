@@ -17,23 +17,29 @@ class AuthController extends Controller
         try {
            
        $valid = $this->validate($request, [
-            'name' => 'required|max:200',
-            'email' => 'required|email|max:220|unique:users',
-            'password' => 'required|min:8'
+            'fld_nombre' => 'required|max:200',
+            'fld_correo' => 'required|email|max:220|unique:tbl_usuarios',
+            'fld_clave' => 'required|min:8',
+            
         ]);
 
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'fld_nombre' => $request->fld_nombre,
+            'fld_correo' => $request->fld_correo,
+            'fld_clave' => Hash::make($request->fld_clave),
+            'fld_estado' => 1, //estado activo
+            'fld_registro' => now(),
+            'fld_IDrol' => 3,  //role cliente
+            'fld_update' => now(),
+
         ]);
 
         $token = JWTAuth::fromUser($user);
 
         return response()->json(
             [ 'message' => 'Usuario registrado exitosamente.',
-              'user' => $user,'token'=>$token
+              'user' => $user->fld_nombre ,'token'=>$token
                ] , 201);
 
         }catch (\Exception $e) {
@@ -46,7 +52,7 @@ class AuthController extends Controller
     // comentario
     public function login(LoginRequest $request)
     {
-        $credencials = $request->only('email','password');
+        $credencials = $request->only('fld_correo','fld_clave');
 
         try {
             

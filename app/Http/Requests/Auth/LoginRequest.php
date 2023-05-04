@@ -25,8 +25,8 @@ class LoginRequest extends FormRequest
     {
         return [
             //
-            'email'=>'required|email',
-            'password'=>'required|min:8'
+            'fld_correo'=>'required|email',
+            'fld_clave'=>'required|min:8'
         ];
     }
 }

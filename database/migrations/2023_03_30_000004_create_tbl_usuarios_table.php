@@ -21,13 +21,13 @@ return new class extends Migration
             $table->string('fld_clave', 60);
             $table->enum('fld_estado', ['0', '1']);
             $table->dateTime('fld_registro');
-            $table->unsignedBigInteger('fld_IDuser');
-            $table->dateTime('fld_UpdateFecha');
-            $table->unsignedBigInteger('fld_UpdateUser');
-            
+            //    $table->unsignedBigInteger('fld_IDuser');
+            $table->dateTime('fld_update');
+            //$table->unsignedBigInteger('fld_UpdateUser');
+
             $table->foreign('fld_IDrol')->references('fld_id')->on('tbl_roles');
-            $table->foreign('fld_IDuser')->references('fld_id')->on('tbl_users');
-            $table->foreign('fld_UpdateUser')->references('fld_id')->on('tbl_users');
+            //  $table->foreign('fld_IDuser')->references('fld_id')->on('tbl_users');
+            //  $table->foreign('fld_UpdateUser')->references('fld_id')->on('tbl_users');
 
             $table->timestamps();
         });

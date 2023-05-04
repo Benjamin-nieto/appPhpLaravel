@@ -20,8 +20,8 @@ class CategorySeeder extends Seeder
            // \App\Models\User::factory(10)->create();
            $category = new Categoria();
 
-           $category->fld_nombre = "INSUNAT";
-           $category->fld_descripcion = "Insumos de natacion";
+           $category->fld_nombre = "MODBZ";
+           $category->fld_descripcion = "Moda & Belleza";
    
            $category->save();
    
