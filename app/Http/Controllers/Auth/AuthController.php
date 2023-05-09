@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -35,6 +36,7 @@ class AuthController extends Controller
 
         ]);
 
+        
         $token = JWTAuth::fromUser($user);
 
         return response()->json(
@@ -52,9 +54,17 @@ class AuthController extends Controller
     // comentario
     public function login(LoginRequest $request)
     {
-        $credencials = $request->only('fld_correo','fld_clave');
 
-        try {
+        $credentials = $request->only('fld_correo', 'fld_clave');
+
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+    
+        return response()->json(['token' => $token]);
+
+
+     /*   try {
             
             if(!$token = JWTAuth::attempt($credencials)){
                 return response()->json([
@@ -69,6 +79,7 @@ class AuthController extends Controller
                 ],500);
         }
 
-        return response()->json(compact('token'));
+        return response()->json(compact('token'));*/
+
     }
 }

@@ -284,7 +284,7 @@ return [
         */
         'user' => [
             'model' => App\Models\User::class,
-            'table' => 'users',
+            'table' => 'tbl_usuarios',
         ],
 
         'auth' => Tymon\JWTAuth\Providers\Auth\Illuminate::class,
