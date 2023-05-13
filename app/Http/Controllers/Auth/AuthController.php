@@ -26,10 +26,13 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'fld_IDrol' => 1,
+            'fld_estado' => '1'
         ]);
 
-        $token = JWTAuth::fromUser($user);
+        
+        $token = JWTAuth::fromUser($user,$user);
 
         return response()->json(
             [ 'message' => 'Usuario registrado exitosamente.',
@@ -48,6 +51,9 @@ class AuthController extends Controller
     {
         $credencials = $request->only('email','password');
 
+        $user = User::where('email', $request->email)->first();
+
+
         try {
             
             if(!$token = JWTAuth::attempt($credencials)){
@@ -65,4 +71,7 @@ class AuthController extends Controller
 
         return response()->json(compact('token'));
     }
+
+
+
 }

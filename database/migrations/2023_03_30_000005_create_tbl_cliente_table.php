@@ -32,6 +32,7 @@ return new class extends Migration
             $table->foreignId('fld_IDuser')->constrained('tbl_usuarios', 'fld_id');
             $table->foreignId('fld_UpdateUser')->nullable()->constrained('tbl_usuarios', 'fld_id');
             $table->timestamp('fld_UpdateFecha')->nullable();
+
         });
     }
 

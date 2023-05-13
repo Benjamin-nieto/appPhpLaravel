@@ -9,6 +9,8 @@ class ClienteInteres extends Model
 {
     use HasFactory;
 
+    //protected $dateFormat = 'd/m/Y';
+
     protected $table = 'tbl_cliente_interes';
     protected $primaryKey = 'fld_id';
     protected $fillable = [
