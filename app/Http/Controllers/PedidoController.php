@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\PedidoDetalle;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class PedidoController extends Controller
@@ -21,6 +23,17 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
         //
+
+        $payload = JWTAuth::parseToken()->getPayload();
+        $userId = $payload->get('id'); 
+
+        $request['fld_registro'] = now();
+        $request['fld_UpdateFecha'] = now();
+       
+        $request['fld_UpdateUser'] = $userId;
+        $request['fld_IDusuario'] = $userId;
+
+
         $pedido = Pedido::create($request->all());
         return response()->json($pedido);
     }
@@ -37,6 +50,12 @@ class PedidoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $payload = JWTAuth::parseToken()->getPayload();
+        $userId = $payload->get('id'); 
+
+        $request['fld_UpdateFecha'] = now();       
+        $request['fld_UpdateUser'] = $userId;        
+
         $pedido = Pedido::find($id);
         $pedido->update($request->all());
 
@@ -48,13 +67,20 @@ class PedidoController extends Controller
     {
         //
 
-        $client = Pedido::find($id);
-        if(empty($pedido["fld_id"])){
-            return response()->json(["message" => "No se encontro registros para eliminar"]);
-        }else{
-            $client->delete();
-            return response()->json(["message" => "Pedido eliminado correctamente"]);
+        $pedido = Pedido::find($id);
 
+        $detalle = PedidoDetalle::where('fld_IDpedido', $id);
+        if(!$detalle->exists()){
+            if(empty($pedido["fld_id"])){
+                return response()->json(["message" => "No se encontro registros para eliminar"]);
+            }else{
+                $pedido->delete();
+                return response()->json(["message" => "Pedido eliminado correctamente"]);
+    
+            }
+        }else{
+                return response()->json(["message" => "El pedido cuenta con detalles, debe eliminar primero el detalle.","detalle"=>$detalle->get()]);
         }
+       
     }
 }

@@ -7,19 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alarma extends Model
 {
-   // use HasFactory;
-   protected $table = 'tbl_alarmas';
-   protected $fillable = ['fld_IDcliente', 'fld_IDusuario', 'fld_fecha', 'fld_observacion', 'fld_registro'];
-   protected $dates = ['fld_fecha', 'fld_registro'];
-   public $timestamps = false;
+    // use HasFactory;
+    protected $table = 'tbl_alarmas';
 
-   public function cliente()
-   {
-       return $this->belongsTo(Cliente::class, 'fld_IDcliente');
-   }
+    protected $primaryKey = 'fld_id';
 
-   public function usuario()
-   {
-       return $this->belongsTo(Usuario::class, 'fld_IDusuario');
-   }
+    protected $fillable = [
+        'fld_IDcliente',
+        'fld_IDusuario', // usuario vendedor
+        'fld_fecha',
+        'fld_observacion',
+        'fld_registro'
+    ];
+    protected $dates = ['fld_fecha', 'fld_registro'];
+    public $timestamps = false;
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'fld_IDcliente');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'fld_IDusuario');
+    }
 }

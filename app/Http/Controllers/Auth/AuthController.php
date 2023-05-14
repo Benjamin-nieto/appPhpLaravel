@@ -32,7 +32,8 @@ class AuthController extends Controller
         ]);
 
         
-        $token = JWTAuth::fromUser($user,$user);
+        $token = JWTAuth::customClaims(['email' => $user->email,
+        'id'=>$user->id,'status'=>$user->fld_estado,'name'=>$user->name])->fromUser($user);
 
         return response()->json(
             [ 'message' => 'Usuario registrado exitosamente.',
@@ -54,9 +55,13 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
 
+/// JWTAuth::attempt($credencials)
+//    $token = JWTAuth::customClaims(['user' => $user])->attempt(['email' => 'usuario@example.com', 'password' => 'contraseña']);
+
         try {
             
-            if(!$token = JWTAuth::attempt($credencials)){
+            if(!$token = JWTAuth::customClaims(['email' => $user->email,
+            'id'=>$user->id,'status'=>$user->fld_estado,'name'=>$user->name])->attempt($credencials) ){
                 return response()->json([
                     "error" => "Invalid Credenciales"
                 ],400);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlarmaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -84,5 +85,12 @@ Route::middleware(['jwt.verify'])->group(function () {
     Route::get('/pedidoDetalle/{id}', [PedidoDetalleController::class, 'show']);
     Route::put('/pedidoDetalle/{id}', [PedidoDetalleController::class, 'update']);
     Route::delete('/pedidoDetalle/{id}', [PedidoDetalleController::class, 'destroy']);
+    Route::delete('/pedidoDetalle/ByPedido/{id}', [PedidoDetalleController::class, 'destroyIdPedido']);
+
+    Route::get('/alarma', [AlarmaController::class, 'index']);
+    Route::post('/alarma', [AlarmaController::class, 'store']);
+    Route::get('/alarma/{id}', [AlarmaController::class, 'show']);
+    Route::put('/alarma/{id}', [AlarmaController::class, 'update']);
+    Route::delete('/alarma/{id}', [AlarmaController::class, 'destroy']);
 
 });

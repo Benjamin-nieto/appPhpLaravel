@@ -10,6 +10,7 @@ class PedidoDetalle extends Model
     use HasFactory;
 
     protected $table = 'tbl_pedidos_detalles';
+    protected $primaryKey = 'fld_id';
 
     protected $fillable = [
         'fld_IDpedido',

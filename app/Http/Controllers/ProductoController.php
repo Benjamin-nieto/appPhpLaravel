@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProductoController extends Controller
 {
@@ -28,10 +29,14 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $request;
-        $data['fld_registro'] = now();
-        $data['fld_UpdateFecha'] = now();
-        $producto = Producto::create($data->all());
+        $payload = JWTAuth::parseToken()->getPayload();
+
+        $request['fld_IDusuario'] = $payload->get('id');
+        $request['fld_UpdateUser'] = $payload->get('id');
+
+        $request['fld_registro'] = now();
+        $request['fld_UpdateFecha'] = now();
+        $producto = Producto::create($request->all());
         return response()->json($producto);
     }
 
@@ -58,6 +63,10 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $payload = JWTAuth::parseToken()->getPayload();
+        $request['fld_UpdateUser'] = $payload->get('id');
+
         $producto = Producto::find($id);
         $request['fld_UpdateFecha'] = now();
         $producto->update($request->all());

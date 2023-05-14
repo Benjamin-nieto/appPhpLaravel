@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClienteInteres;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ClienteInteresController extends Controller
 {
@@ -19,6 +20,11 @@ class ClienteInteresController extends Controller
     public function store(Request $request)
     {
         //
+        $payload = JWTAuth::parseToken()->getPayload();
+        $userId = $payload->get('id'); 
+        $request['fld_UpdateUser'] = $userId;
+        $request['fld_UpdateFecha'] = now();
+
         $request->merge(['fld_fecha' => now()]);
         $client = ClienteInteres::create($request->all());
         return response()->json($client);
@@ -36,6 +42,11 @@ class ClienteInteresController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $payload = JWTAuth::parseToken()->getPayload();
+        $userId = $payload->get('id'); 
+        $request['fld_UpdateUser'] = $userId;
+        $request['fld_UpdateFecha'] = now();
+        
         $client = ClienteInteres::find($id);
         $client->update($request->all());
 
