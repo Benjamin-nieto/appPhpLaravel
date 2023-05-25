@@ -76,9 +76,7 @@ class AuthController extends Controller
                     ], 400);
                 }
             }
-            return response()->json([
-                "error" => "Invalid Credenciales"
-            ], 400);
+           
         } catch (\Exception $th) {
             return response()->json([
                 "error" => "Not create token"

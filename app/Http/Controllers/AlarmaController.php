@@ -59,10 +59,10 @@ class AlarmaController extends Controller
 
         $alarm = Alarma::find($id);
         if (empty($alarm["fld_id"])) {
-            return response()->json(["message" => "No se encontro registros para eliminar"]);
+            return response()->json(["message" => "No se encontro registros para eliminar"],404);
         } else {
             $alarm->delete();
-            return response()->json(["message" => "Alarma eliminada correctamente"]);
+            return response()->json(["message" => "Alarma eliminada correctamente"],200);
         }
     }
 

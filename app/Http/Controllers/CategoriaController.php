@@ -74,10 +74,10 @@ class CategoriaController extends Controller
 
         $category = Categoria::find($id);
         if(empty($category["fld_id"])){
-            return response()->json(["message" => "No se encontro registros para eliminar"]);
+            return response()->json(["message" => "No se encontro registros para eliminar"],404);
         }else{
             $category->delete();
-            return response()->json(["message" => "Categoria eliminada correctamente"]);
+            return response()->json(["message" => "Categoria eliminada correctamente"],200);
 
         }
     }
